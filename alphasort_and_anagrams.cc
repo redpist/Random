@@ -44,7 +44,8 @@ double hash(const std::string &str)
 
 struct    AlphaCompare
 {
-  bool operator() (const std::pair<double, std::string> &a, const std::pair<double, std::string> &b)
+  bool operator() (const std::pair<double, std::string> &a,
+                   const std::pair<double, std::string> &b)
   {
     return strcmp(a.second.c_str(), b.second.c_str()) <= 0;
   }
@@ -52,16 +53,20 @@ struct    AlphaCompare
 
 int main(int argc, char *argv[])
 {
-  std::string                                                   buff;
-  std::unordered_multimap<double, const std::string&>           anagramsDico;
-  std::set<std::pair<double, std::string>, AlphaCompare>        dico;
+  std::string                                           buff;
+  std::unordered_multimap<double,
+                          const std::string&>           anagramsDico;
+  std::set<std::pair<double, std::string>,
+           AlphaCompare>                                dico;
 
   while (!std::cin.eof())
     {
       getline(std::cin, buff);
-      auto pair = dico.insert(std::pair<double, const std::string>(hash(buff), buff));
+      auto pair = dico.insert(std::pair<double, const std::string>(hash(buff),
+                                                                   buff));
       if (pair.second)
-        anagramsDico.insert(std::pair<double, const std::string&>(pair.first->first, pair.first->second));
+        anagramsDico.insert(std::pair<double, const std::string&>(pair.first->first,
+                                                                  pair.first->second));
     }
   #ifdef PRINT_SORTED_DICTIONARY
   for (auto word: dico)
