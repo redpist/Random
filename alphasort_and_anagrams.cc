@@ -52,9 +52,9 @@ struct    AlphaCompare
 
 int main(int argc, char *argv[])
 {
-  std::string                                 buff;
-  std::unordered_multimap<double, const std::string&>   anagramsDico;
-  std::set<std::pair<double, std::string>, AlphaCompare>           dico;
+  std::string                                                   buff;
+  std::unordered_multimap<double, const std::string&>           anagramsDico;
+  std::set<std::pair<double, std::string>, AlphaCompare>        dico;
 
   while (!std::cin.eof())
     {
