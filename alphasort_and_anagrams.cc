@@ -2,7 +2,7 @@
 // Thx to Peluche, Bombela and C++11
 
 // usage : cat dictionary | ./alphasort_and_anagrams
-// dictionay must be in ASCII or ISO 8859-X, sry
+// dictionary must be in ASCII or ISO 8859-X, sry
 
 #include <unordered_map>
 #include <vector>
