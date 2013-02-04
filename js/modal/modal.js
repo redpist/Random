@@ -37,10 +37,11 @@
           var modalUrl = modal;
         }
 
+
         $(this).click(function(event) {
 
           function openModal(modalSelector, closeCallback) {
-
+            console.log(modalSelector + " : " + rmodalZindex);
             $(overlay).css({
               'display': 'block',
               'z-index': rmodalZindex
@@ -51,31 +52,39 @@
               'display': 'block',
               'z-index': rmodalZindex + 1
             });
+            rmodalZindex += 2;
 
             function closeModal(modalSelector) {
               closeCallback(modalSelector);
               $(overlay).css('display', 'none');
-              $(document).unbind("keyup", activeRmodal[activeRmodal.length - 1]);
+              $(document).unbind('keyup', activeRmodal[activeRmodal.length - 1][0]);
+              $(document).unbind('click', activeRmodal[activeRmodal.length - 1][1]);
               activeRmodal.pop();
-              if (activeRmodal.length != 0)
-                $(document).keyup(activeRmodal[activeRmodal.length - 1]);
+              if (activeRmodal.length > 0) {
+                $(document).bind('keyup', activeRmodal[activeRmodal.length - 1][0]);
+                $(document).bind('click', activeRmodal[activeRmodal.length - 1][1]);
+              }
               rmodalZindex -= 2;
             };
 
-            $(overlay).click(function () {
-              closeModal(modalSelector);
-            });
+            if (activeRmodal.length > 0)
+            {
+              $(document).unbind('keyup', activeRmodal[activeRmodal.length - 1][0]);
+              $(document).unbind('click', activeRmodal[activeRmodal.length - 1][1]);
+            }
 
-            if (activeRmodal.length != 0)
-              $(document).unbind("keyup", activeRmodal[activeRmodal.length - 1]);
-              activeRmodal.push(function(event) {
+            activeRmodal.push(Array(function(event) {
               if (event.which == 27) {
                 closeModal(modalSelector);
                 return false;
               }
-            });
-            $(document).keyup(activeRmodal[activeRmodal.length - 1]);
-            rmodalZindex += 2;
+            }, function() {
+              closeModal(modalSelector);
+              return false;
+            }));
+
+            $(document).bind('keyup', activeRmodal[activeRmodal.length - 1][0]);
+            $(document).bind('click', activeRmodal[activeRmodal.length - 1][1]);
           };
 
           if (modal[0] === '#') {
