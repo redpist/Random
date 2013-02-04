@@ -1,4 +1,5 @@
 (function($){
+  activeRmodal = new Array();
   $.fn.extend({ 
     Rmodal: function(options) {
       var defaults = {
@@ -38,42 +39,53 @@
         $(this).click(function(event) {
 
           function openModal(modalSelector, closeCallback) {
+
+            console.log('register modal : ' + modalSelector);
             $(overlay).css('display', 'block');
             $(modalSelector).css({
               'margin-top': 0,
               'margin-left': -($(modalSelector).outerWidth() / 2),
               'display': 'block'});
 
-            function closeModal() {
-              closeCallback();
+            function closeModal(modalSelector) {
+              closeCallback(modalSelector);
               $(overlay).css('display', 'none');
+              $(document).unbind("keyup", activeRmodal[activeRmodal.length - 1]);
+              activeRmodal.pop();
+              if (activeRmodal.length != 0)
+                $(document).keyup(activeRmodal[activeRmodal.length - 1]);
             };
 
-            $(overlay).click(closeModal);
-            $(document).keyup(function(event) {
+            $(overlay).click(function () {
+              closeModal(modalSelector);
+            });
+
+            if (activeRmodal.length != 0)
+              $(document).unbind("keyup", activeRmodal[activeRmodal.length - 1]);
+              activeRmodal.push(function(event) {
               if (event.which == 27) {
-                console.log('close : ' + modalSelector);
-                closeModal();
-              return false;
+                closeModal(modalSelector);
+                return false;
               }
             });
+            $(document).keyup(activeRmodal[activeRmodal.length - 1]);
           };
 
-        if (modal[0] === '#') {
-          openModal(modalSelector, function() {
-            $(modalSelector).css('display', 'none');
-          });
-        } else {
-          modalSelector = $('<div class="rmodal-modal"></div>');
-          $("body").append(modalSelector);
-          $.get(modalUrl, function(data) {
-            $(modalSelector).html(data);
-          }, 'html');
-          openModal(modalSelector, function() {
-            $(modalSelector).remove();
-          });
-        }
-        return false;
+          if (modal[0] === '#') {
+            openModal(modalSelector, function(modalSelector) {
+              $(modalSelector).css('display', 'none');
+            });
+          } else {
+            modalSelector = $('<div class="rmodal-modal"></div>');
+            $("body").append(modalSelector);
+            $.get(modalUrl, function(data) {
+              $(modalSelector).html(data);
+            }, 'html');
+            openModal(modalSelector, function(modalSelector) {
+              $(modalSelector).remove();
+            });
+          }
+          return false;
         });
       });
     }
