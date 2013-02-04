@@ -17,28 +17,24 @@
 	<script type="text/javascript">
 	$(document).ready(function() {
 		$('#test0').Rmodal();
+		$('#test0-0').Rmodal();
 		$('#test1').Rmodal();
-		$('#test2').Rmodal();
-		$('#test3').Rmodal();
 	})
 	</script>
 </head>
 <body>
 	<p>
-		<a id="test0" href="#test0-div">Test 0</a>
-		<a id="test2" href="./remote.html">Test 2</a>
+		<a id="test0" href="#test0-div">Test linking to an local div</a> | <a id="test1" href="./remote.html">Test linking to a remote page</a>
 	</p>
 	<div id="test0-div" class="modal">
-		<h1>Test 0</h1>
-		<p>=) <a id="test1" href="#test1-div">Test 1</a></p>
+		<h1>Local div works !</h1>
+		<p><a id="test0-0" href="#test0-0-div">Nested modal (linking to another local div)</a></p>
 	</div>
-	<div id="test1-div" class="modal">
-		<h1>Test 1</h1>
-		<p>=)</p>
+	<div id="test0-0-div" class="modal">
+		<h1>Nested local div works !</h1>
 	</div>
-	<div id="test3-div" class="modal" style="display:none;">
-		<h1>Test 3</h1>
-		<p>=)</p>
+	<div id="test2-div" class="modal" style="display:none;">
+		<h1>Nested local div from a remote page works !</h1>
 	</div>
 </body>
 </html>
