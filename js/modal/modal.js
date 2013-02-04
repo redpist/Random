@@ -41,7 +41,6 @@
         $(this).click(function(event) {
 
           function openModal(modalSelector, closeCallback) {
-            console.log(modalSelector + " : " + rmodalZindex);
             $(overlay).css({
               'display': 'block',
               'z-index': rmodalZindex
