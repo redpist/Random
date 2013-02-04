@@ -7,26 +7,37 @@
 	<script src="modal.js"></script>
    	<link href="modal.css" rel="stylesheet" media="screen" />
 
+   	<style>
+   	.modal {
+   		border-radius:4px;
+   		border: 3px #eee solid;
+   	}
+   	</style>
+
 	<script type="text/javascript">
 	$(document).ready(function() {
 		$('#test0').Rmodal();
 		$('#test1').Rmodal();
 		$('#test2').Rmodal();
+		$('#test3').Rmodal();
 	})
 	</script>
 </head>
 <body>
 	<p>
 		<a id="test0" href="#test0-div">Test 0</a>
-		<a id="test1" href="#test1-div">Test 1</a>
 		<a id="test2" href="./remote.html">Test 2</a>
 	</p>
-	<div id="test0-div" style="margin-top:900px;border-radius:4px; border: 3px #eee solid;">
+	<div id="test0-div" class="modal">
 		<h1>Test 0</h1>
+		<p>=) <a id="test1" href="#test1-div">Test 1</a></p>
+	</div>
+	<div id="test1-div" class="modal">
+		<h1>Test 1</h1>
 		<p>=)</p>
 	</div>
-	<div id="test1-div" style="margin-top:900px;border-radius:4px; border: 3px #eee solid;">
-		<h1>Test 1</h1>
+	<div id="test3-div" class="modal" style="display:none;">
+		<h1>Test 3</h1>
 		<p>=)</p>
 	</div>
 </body>
