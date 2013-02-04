@@ -57,11 +57,11 @@
               closeCallback(modalSelector);
               $(overlay).css('display', 'none');
               $(document).unbind('keyup', activeRmodal[activeRmodal.length - 1][0]);
-              $(document).unbind('click', activeRmodal[activeRmodal.length - 1][1]);
+              $(overlay).unbind('click', activeRmodal[activeRmodal.length - 1][1]);
               activeRmodal.pop();
               if (activeRmodal.length > 0) {
                 $(document).bind('keyup', activeRmodal[activeRmodal.length - 1][0]);
-                $(document).bind('click', activeRmodal[activeRmodal.length - 1][1]);
+                $(overlay).bind('click', activeRmodal[activeRmodal.length - 1][1]);
               }
               rmodalZindex -= 2;
             };
@@ -69,7 +69,7 @@
             if (activeRmodal.length > 0)
             {
               $(document).unbind('keyup', activeRmodal[activeRmodal.length - 1][0]);
-              $(document).unbind('click', activeRmodal[activeRmodal.length - 1][1]);
+              $(overlay).unbind('click', activeRmodal[activeRmodal.length - 1][1]);
             }
 
             activeRmodal.push(Array(function(event) {
@@ -83,7 +83,7 @@
             }));
 
             $(document).bind('keyup', activeRmodal[activeRmodal.length - 1][0]);
-            $(document).bind('click', activeRmodal[activeRmodal.length - 1][1]);
+            $(overlay).bind('click', activeRmodal[activeRmodal.length - 1][1]);
           };
 
           if (modal[0] === '#') {
