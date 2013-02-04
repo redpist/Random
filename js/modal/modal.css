@@ -6,7 +6,6 @@
     left: 0px;
 	background-color: #000;
 	opacity: 0.5;
-	z-index: 4242;
 	position: fixed;
 }
 
@@ -14,7 +13,6 @@
 	position: fixed;
 	display:none;
 	background-color: #fff;
-	z-index: 424242;
 	margin: 0;
     left: 50%;
 	top: 100px;
