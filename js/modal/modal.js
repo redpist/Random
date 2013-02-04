@@ -1,7 +1,6 @@
 (function($){
   activeRmodal = new Array();
-  startingRmodalZindex = 4242;
-  relativeRmodalZindex = 0;
+  rmodalZindex = 4242;
   $.fn.extend({ 
     Rmodal: function(options) {
       var defaults = {
@@ -42,17 +41,15 @@
 
           function openModal(modalSelector, closeCallback) {
 
-            console.log('register modal : ' + modalSelector);
-            console.log('z-index : ' +  startingRmodalZindex);
             $(overlay).css({
               'display': 'block',
-              'z-index': startingRmodalZindex + relativeRmodalZindex
+              'z-index': rmodalZindex
             });
             $(modalSelector).css({
               'margin-top': 0,
               'margin-left': -($(modalSelector).outerWidth() / 2),
               'display': 'block',
-              'z-index': startingRmodalZindex + relativeRmodalZindex + 1
+              'z-index': rmodalZindex + 1
             });
 
             function closeModal(modalSelector) {
@@ -62,7 +59,7 @@
               activeRmodal.pop();
               if (activeRmodal.length != 0)
                 $(document).keyup(activeRmodal[activeRmodal.length - 1]);
-              relativeRmodalZindex -= 2;
+              rmodalZindex -= 2;
             };
 
             $(overlay).click(function () {
@@ -78,7 +75,7 @@
               }
             });
             $(document).keyup(activeRmodal[activeRmodal.length - 1]);
-            relativeRmodalZindex += 2;
+            rmodalZindex += 2;
           };
 
           if (modal[0] === '#') {
