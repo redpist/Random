@@ -1,0 +1,33 @@
+<html>
+<head>
+	<title>Demo Rmodal</title>	
+  	<!-- JQuery Start -->
+	<script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
+  	<!-- JQuery End -->
+	<script src="modal.js"></script>
+   	<link href="modal.css" rel="stylesheet" media="screen" />
+
+	<script type="text/javascript">
+	$(document).ready(function() {
+		$('#test0').Rmodal();
+		$('#test1').Rmodal();
+		$('#test2').Rmodal();
+	})
+	</script>
+</head>
+<body>
+	<p>
+		<a id="test0" href="#test0-div">Test 0</a>
+		<a id="test1" href="#test1-div">Test 1</a>
+		<a id="test2" href="./remote.html">Test 2</a>
+	</p>
+	<div id="test0-div" style="margin-top:900px;border-radius:4px; border: 3px #eee solid;">
+		<h1>Test 0</h1>
+		<p>=)</p>
+	</div>
+	<div id="test1-div" style="margin-top:900px;border-radius:4px; border: 3px #eee solid;">
+		<h1>Test 1</h1>
+		<p>=)</p>
+	</div>
+</body>
+</html>
