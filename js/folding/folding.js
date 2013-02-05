@@ -13,7 +13,8 @@
           $(this).css('cursor', 'auto');
           $(this).parent().click(function (folder) {
             return function(event) {
-              $(folder).toggle();
+              $(this).toggleClass("opened");
+              $(folder).slideToggle();
               event.preventDefault();
               return false;
             };
