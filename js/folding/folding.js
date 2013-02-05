@@ -14,9 +14,10 @@
           $(this).css('cursor', 'auto');
           $(this).parent().click(function (folder) {
             return function(event) {
-              $(this).toggleClass("opened");
-              $(folder).slideToggle(options.duration);
               event.preventDefault();
+              $(folder).stop(true, true).slideToggle(options.duration, function(parent) {
+                return function() { $(parent).toggleClass("opened"); };
+              }(this));
               return false;
             };
           }(this));
