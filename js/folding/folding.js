@@ -2,6 +2,7 @@
   $.fn.extend({ 
     Rfolding: function(options) {
       var defaults = {
+        duration: 0
       };
       options = $.extend(defaults, options);
 
@@ -14,7 +15,7 @@
           $(this).parent().click(function (folder) {
             return function(event) {
               $(this).toggleClass("opened");
-              $(folder).slideToggle();
+              $(folder).slideToggle(options.duration);
               event.preventDefault();
               return false;
             };

@@ -33,6 +33,7 @@
 
         if (modal[0] === '#') {
           $(modalSelector).addClass('rmodal-modal');
+          $(modalSelector).css('display', 'none')
         } else {
           var modalUrl = modal;
         }
@@ -40,14 +41,17 @@
 
         $(this).click(function(event) {
 
-          function openModal(modalSelector, overlay, closeCallback) {
+          function openModal(modalSelector, closeCallback) {
             $(overlay).css({
               'display': 'block',
               'z-index': rmodalZindex
             });
             $(modalSelector).css({
-              'margin-top': 0,
-              'margin-left': -($(modalSelector).outerWidth() / 2),
+              'position': 'fixed',
+              'left': '50%',
+              'top': '100px',
+              'margin': 0,
+              'margin-left': -($(modalSelector).outerWidth() / 2) + 'px',
               'display': 'block',
               'z-index': rmodalZindex + 1
             });
@@ -88,7 +92,7 @@
           };
 
           if (modal[0] === '#') {
-            openModal(modalSelector, overlay, function(modalSelector) {
+            openModal(modalSelector, function(modalSelector) {
               $(modalSelector).css('display', 'none');
             });
           } else {
@@ -97,7 +101,7 @@
             $.get(modalUrl, function(data) {
               $(modalSelector).html(data);
             }, 'html');
-            openModal(modalSelector, overlay, function(modalSelector) {
+            openModal(modalSelector, function(modalSelector) {
               $(modalSelector).remove();
             });
           }
