@@ -40,7 +40,7 @@
 
         $(this).click(function(event) {
 
-          function openModal(modalSelector, closeCallback) {
+          function openModal(modalSelector, overlay, closeCallback) {
             $(overlay).css({
               'display': 'block',
               'z-index': rmodalZindex
@@ -55,13 +55,13 @@
 
             function closeModal(modalSelector) {
               closeCallback(modalSelector);
-              $(overlay).css('display', 'none');
+              $(activeRmodal[activeRmodal.length - 1][1].overlay).css('display', 'none');
               $(document).unbind('keyup', activeRmodal[activeRmodal.length - 1][0]);
-              $(overlay).unbind('click', activeRmodal[activeRmodal.length - 1][1]);
+              $(activeRmodal[activeRmodal.length - 1][1].overlay).unbind('click', activeRmodal[activeRmodal.length - 1][1]);
               activeRmodal.pop();
               if (activeRmodal.length > 0) {
                 $(document).bind('keyup', activeRmodal[activeRmodal.length - 1][0]);
-                $(overlay).bind('click', activeRmodal[activeRmodal.length - 1][1]);
+                $(activeRmodal[activeRmodal.length - 1][1].overlay).bind('click', activeRmodal[activeRmodal.length - 1][1]);
               }
               rmodalZindex -= 2;
             };
@@ -69,7 +69,7 @@
             if (activeRmodal.length > 0)
             {
               $(document).unbind('keyup', activeRmodal[activeRmodal.length - 1][0]);
-              $(overlay).unbind('click', activeRmodal[activeRmodal.length - 1][1]);
+              $(activeRmodal[activeRmodal.length - 1][1].overlay).unbind('click', activeRmodal[activeRmodal.length - 1][1]);
             }
 
             activeRmodal.push(Array(function(event) {
@@ -84,10 +84,11 @@
 
             $(document).bind('keyup', activeRmodal[activeRmodal.length - 1][0]);
             $(overlay).bind('click', activeRmodal[activeRmodal.length - 1][1]);
+            activeRmodal[activeRmodal.length - 1][1].overlay = overlay;
           };
 
           if (modal[0] === '#') {
-            openModal(modalSelector, function(modalSelector) {
+            openModal(modalSelector, overlay, function(modalSelector) {
               $(modalSelector).css('display', 'none');
             });
           } else {
@@ -96,7 +97,7 @@
             $.get(modalUrl, function(data) {
               $(modalSelector).html(data);
             }, 'html');
-            openModal(modalSelector, function(modalSelector) {
+            openModal(modalSelector, overlay, function(modalSelector) {
               $(modalSelector).remove();
             });
           }
