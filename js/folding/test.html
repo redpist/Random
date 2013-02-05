@@ -1,0 +1,41 @@
+<html>
+<head>
+  <title>Demo Rfolding</title>  
+    <!-- JQuery Start -->
+  <script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
+    <!-- JQuery End -->
+  <script src="folding.js"></script>
+  <link href="folding.css" rel="stylesheet" media="screen" />
+  <script type="text/javascript">
+  $(document).ready(function() {
+    $('#test0').Rfolding();
+  })
+  </script>
+</head>
+<body>
+  <ul id="test0">
+    <li>
+      Test 0
+      <ul class="folder">
+        <li>
+          Test 0-0
+        </li>
+        <li>
+          Test 0-1
+        </li>
+      </ul>
+    </li>
+    <li>
+      Test 1
+      <ul class="folder">
+        <li>
+          Test 1-0
+        </li>
+        <li>
+          Test 1-1
+        </li>
+      </ul>
+    </li>
+  </ul>
+</body>
+</html>
